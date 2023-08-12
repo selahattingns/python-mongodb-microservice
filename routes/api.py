@@ -1,12 +1,12 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 app = Flask(__name__)
 
-from app.controllers.example_controller import get_resource, get_resource2
+from app.controllers.log_controller import getlogsForUser, createLogForUser
 
-@app.route('/api/resource1', methods=['GET'])
-def api_get_resource(): return get_resource()
+@app.route('/api/logs/<userId>', methods=['GET'])
+def apiGetlogsForUser(userId): return getlogsForUser(userId)
 
-@app.route('/api/resource2', methods=['GET'])
-def api_get_resource2(): return get_resource2()
+@app.route('/api/logs', methods=['POST'])
+def apiCreateLogForUser(): return createLogForUser(request.get_json())
 
 
